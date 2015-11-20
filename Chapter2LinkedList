@@ -1,0 +1,32 @@
+public class Node{
+        int data = 0;
+        Node next = null;
+        public Node(int data){
+            this.data = data;
+            next = null;
+        }
+    }
+    
+    public class LinkedList{
+        Node start;
+        
+        public Node add(Node start, int data){
+            Node node = new Node(data);
+            if(start == null){
+                start = node;
+                return start;
+            }
+            else{
+                Node tempNode = start;
+                while(tempNode.next != null){
+                    tempNode = tempNode.next;
+                }
+                tempNode.next = node;
+            }
+                
+        }
+        
+        public LinkedList(){
+            
+        }
+    }
