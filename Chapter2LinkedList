@@ -63,21 +63,22 @@ public class LinkedList{
     	//return start;
     }
     
-    /*public static void main(String[] args){
+    public static void main(String[] args){
     	LinkedList linkedList = new LinkedList();
     	Node start = linkedList.add('b', null);
     	start = linkedList.add('c', start);
     	start = linkedList.add('a', start);
-    	start = linkedList.add('d', start);
+    	start = linkedList.add('c', start);
     	linkedList.traverseList(start);
+    	System.out.println("");
     	start = linkedList.deleteNode(start, 'c');
     	System.out.println("");
     	System.out.println("After deleting c");
     	linkedList.traverseList(start);
-    	start = linkedList.deleteNode(start, 'd');
+    	start = linkedList.deleteNode(start, 'b');
     	System.out.println("");
-    	System.out.println("After deleting d");
+    	System.out.println("After deleting b");
     	linkedList.traverseList(start);
-    }*/
+    }
 
 }
