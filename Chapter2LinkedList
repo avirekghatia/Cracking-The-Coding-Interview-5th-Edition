@@ -1,32 +1,83 @@
-public class Node{
-        int data = 0;
-        Node next = null;
-        public Node(int data){
+public class LinkedList{
+    
+    Node start;
+    private class Node{
+        char data;
+        Node next;
+        
+        public Node(char data){
             this.data = data;
-            next = null;
+            this.next = null;
         }
     }
     
-    public class LinkedList{
-        Node start;
-        
-        public Node add(Node start, int data){
-            Node node = new Node(data);
-            if(start == null){
-                start = node;
-                return start;
+    public LinkedList(){
+        Node start = null;
+    }
+    
+    
+    //this method adds to the list and returns the first Node in the new Linked List
+    public Node add(char data, Node start){
+        Node node = new Node(data);
+        if(start == null)
+            return node;
+        else{
+            Node tempNode = start;
+            while(tempNode.next != null){
+                tempNode = tempNode.next;
             }
-            else{
-                Node tempNode = start;
-                while(tempNode.next != null){
-                    tempNode = tempNode.next;
-                }
-                tempNode.next = node;
-            }
-                
-        }
-        
-        public LinkedList(){
-            
+            tempNode.next = node;
+            return start;
         }
     }
+    
+    public void traverseList(Node start){
+        
+        if(start == null)
+            System.out.println("Empty");
+        else{
+            Node node = start;
+            while(node != null){
+                System.out.println(node.data);
+                node = node.next;
+            }
+        }
+    }
+    
+    public Node deleteNode(Node start, char data){
+    	if(start == null){
+    		return null;
+    	}
+    	else{
+    		if(start.data == data)
+    			return start.next;
+    		else{
+    			Node node = start;
+    			while(node.next.data != data){
+    				node = node.next;
+    			}
+    			node.next = node.next.next;
+    			return start;
+    		}
+    	}
+    	//return start;
+    }
+    
+    /*public static void main(String[] args){
+    	LinkedList linkedList = new LinkedList();
+    	Node start = linkedList.add('b', null);
+    	start = linkedList.add('c', start);
+    	start = linkedList.add('a', start);
+    	start = linkedList.add('d', start);
+    	linkedList.traverseList(start);
+    	start = linkedList.deleteNode(start, 'c');
+    	System.out.println("");
+    	System.out.println("After deleting c");
+    	linkedList.traverseList(start);
+    	start = linkedList.deleteNode(start, 'd');
+    	System.out.println("");
+    	System.out.println("After deleting d");
+    	linkedList.traverseList(start);
+    }*/
+
+}
