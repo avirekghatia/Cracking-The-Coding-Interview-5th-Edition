@@ -85,7 +85,11 @@ public class LinkedList {
 		while(temp.next != null){
 			if(hashMap.containsKey(temp.data)){
 				System.out.println("Contains duplicates");
-				return;
+				Node follower = head;
+				while(follower.next != temp){
+					follower = follower.next;
+				}
+				follower.next = temp.next;
 			}
 			else{
 				hashMap.put(temp.data, true);
@@ -94,7 +98,11 @@ public class LinkedList {
 		}
 		if(hashMap.containsKey(temp.data)){
 			System.out.println("Contains duplicates");
-			return;
+			Node follower = head;
+			while(follower.next != temp){
+				follower = follower.next;
+			}
+			follower.next = null;
 		}
 		else{
 			hashMap.put(temp.data, true);
@@ -114,13 +122,12 @@ public class LinkedList {
 		linkedList.add(" ");
 		linkedList.add("U");
 		linkedList.add("P");
+		linkedList.add("P");
 		linkedList.removeDuplicatesHashTable();
 		//System.out.println("The size of list is "+linkedList.sizeOfLinkedList());
 		
 		//Using bubble sort to sort the array elements.
-		for(int i = 0; i < linkedList.sizeOfLinkedList(); ++i){
-			
-		}
+		linkedList.traverseList();
 		
 		
 		/*linkedList.traverseList();
