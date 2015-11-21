@@ -1,84 +1,134 @@
-public class LinkedList{
-    
-    Node start;
-    private class Node{
-        char data;
-        Node next;
-        
-        public Node(char data){
-            this.data = data;
-            this.next = null;
-        }
-    }
-    
-    public LinkedList(){
-        Node start = null;
-    }
-    
-    
-    //this method adds to the list and returns the first Node in the new Linked List
-    public Node add(char data, Node start){
-        Node node = new Node(data);
-        if(start == null)
-            return node;
-        else{
-            Node tempNode = start;
-            while(tempNode.next != null){
-                tempNode = tempNode.next;
-            }
-            tempNode.next = node;
-            return start;
-        }
-    }
-    
-    public void traverseList(Node start){
-        
-        if(start == null)
-            System.out.println("Empty");
-        else{
-            Node node = start;
-            while(node != null){
-                System.out.println(node.data);
-                node = node.next;
-            }
-        }
-    }
-    
-    public Node deleteNode(Node start, char data){
-    	if(start == null){
-    		return null;
-    	}
-    	else{
-    		if(start.data == data)
-    			return start.next;
-    		else{
-    			Node node = start;
-    			while(node.next.data != data){
-    				node = node.next;
-    			}
-    			node.next = node.next.next;
-    			return start;
-    		}
-    	}
-    	//return start;
-    }
-    
-    public static void main(String[] args){
-    	LinkedList linkedList = new LinkedList();
-    	Node start = linkedList.add('b', null);
-    	start = linkedList.add('c', start);
-    	start = linkedList.add('a', start);
-    	start = linkedList.add('c', start);
-    	linkedList.traverseList(start);
-    	System.out.println("");
-    	start = linkedList.deleteNode(start, 'c');
-    	System.out.println("");
-    	System.out.println("After deleting c");
-    	linkedList.traverseList(start);
-    	start = linkedList.deleteNode(start, 'b');
-    	System.out.println("");
-    	System.out.println("After deleting b");
-    	linkedList.traverseList(start);
-    }
+package ctciChapter2;
+
+import java.util.HashMap;
+
+public class LinkedList {
+	
+	Node head;
+	
+	public LinkedList(){
+		this.head = null;
+	}
+	
+	/*
+	 * Adds an element to the end of the linked list.
+	 */
+	public void add(Object data){
+		Node node = new Node(data);
+		if(head == null)
+			head = node;
+		else{
+			Node temp = head;
+			while(temp.next != null){
+				temp = temp.next;
+			}
+			temp.next = node;
+		}
+	}
+	
+	public void deleteNode(Object data){
+		
+		if(head == null){
+			System.out.println("The list is empty");
+		}
+		
+		else if(head.data == data){
+			head = head.next;
+			System.out.println("The element has been deleted");
+		}
+		
+		else{
+			Node temp = head;
+			while(temp.next != null && temp.next.data != data){
+				temp = temp.next;
+			}
+			if(temp.next == null){
+				System.out.println("The element is not present in the list.");
+			}
+			else{
+				temp.next = temp.next.next;
+			}
+		}
+		
+	}
+	
+	public void traverseList(){
+		System.out.println();
+		System.out.println("Traversing the list");
+		Node temp = head;
+		while(temp.next != null){
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+		System.out.println(temp.data);
+	}
+	
+	public int sizeOfLinkedList(){
+		int size = 0;
+		Node temp = head;
+		if(temp == null){
+			return 0;
+		}
+		else{
+			size = 1;
+			while(temp.next != null){
+				size += 1;
+				temp = temp.next;
+			}
+			return size;
+		}
+	}
+	
+	public void removeDuplicatesHashTable(){
+		Node temp = head;
+		HashMap<Object, Boolean> hashMap = new HashMap<Object, Boolean>();
+		while(temp.next != null){
+			if(hashMap.containsKey(temp.data)){
+				System.out.println("Contains duplicates");
+				return;
+			}
+			else{
+				hashMap.put(temp.data, true);
+			}
+			temp = temp.next;
+		}
+		if(hashMap.containsKey(temp.data)){
+			System.out.println("Contains duplicates");
+			return;
+		}
+		else{
+			hashMap.put(temp.data, true);
+		}
+		System.out.println("They are unique");
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		LinkedList linkedList = new LinkedList();
+		linkedList.add("F");
+		linkedList.add("O");
+		linkedList.add("L");
+		linkedList.add("L");
+		linkedList.add("O");
+		linkedList.add("W");
+		linkedList.add(" ");
+		linkedList.add("U");
+		linkedList.add("P");
+		linkedList.removeDuplicatesHashTable();
+		//System.out.println("The size of list is "+linkedList.sizeOfLinkedList());
+		
+		//Using bubble sort to sort the array elements.
+		for(int i = 0; i < linkedList.sizeOfLinkedList(); ++i){
+			
+		}
+		
+		
+		/*linkedList.traverseList();
+		linkedList.deleteNode("F");
+		linkedList.traverseList();
+		
+		linkedList.deleteNode("X");
+		linkedList.traverseList();*/
+	}
 
 }
