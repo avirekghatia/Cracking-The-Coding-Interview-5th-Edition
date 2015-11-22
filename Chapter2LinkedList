@@ -39,14 +39,11 @@ public class LinkedList {
 		
 		else{
 			Node temp = head;
-			while(temp.next != null && temp.next.data != data){
+			while(temp.next != null){
+				if(temp.next.data == data){
+					temp.next = temp.next.next;
+				}
 				temp = temp.next;
-			}
-			if(temp.next == null){
-				System.out.println("The element is not present in the list.");
-			}
-			else{
-				temp.next = temp.next.next;
 			}
 		}
 		
@@ -76,6 +73,25 @@ public class LinkedList {
 				temp = temp.next;
 			}
 			return size;
+		}
+	}
+	
+	public void removeDuplicateWithoutBuffer(){
+		Node fastRunner = head;
+		Node slowRunner = head;
+		while(slowRunner != null){
+			fastRunner = slowRunner;
+			//System.out.println("I am on this right now: "+fastRunner.data);
+			while(fastRunner.next != null){
+				if(slowRunner.data == fastRunner.next.data){
+					fastRunner.next = fastRunner.next.next;
+				}
+				else{
+					fastRunner = fastRunner.next;
+				}
+				
+			}
+			slowRunner = slowRunner.next;
 		}
 	}
 	
@@ -114,6 +130,7 @@ public class LinkedList {
 		// TODO Auto-generated method stub
 		LinkedList linkedList = new LinkedList();
 		linkedList.add("F");
+		linkedList.add("F");
 		linkedList.add("O");
 		linkedList.add("L");
 		linkedList.add("L");
@@ -123,11 +140,16 @@ public class LinkedList {
 		linkedList.add("U");
 		linkedList.add("P");
 		linkedList.add("P");
-		linkedList.removeDuplicatesHashTable();
+		//linkedList.removeDuplicatesHashTable();
 		//System.out.println("The size of list is "+linkedList.sizeOfLinkedList());
-		
-		//Using bubble sort to sort the array elements.
 		linkedList.traverseList();
+		System.out.println("");
+		System.out.println("Removing without bufffer");
+		linkedList.removeDuplicateWithoutBuffer();
+		linkedList.traverseList();
+		//Using bubble sort to sort the array elements.
+		
+		System.out.println(linkedList.sizeOfLinkedList());
 		
 		
 		/*linkedList.traverseList();
