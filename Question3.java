@@ -15,13 +15,13 @@ public class LinkedList {
 	 */
 	public Node add(Object data){
 		Node node = new Node(data);
-		if(head == null){
-			head = node;
-			return head;
+		if(this.head == null){
+			this.head = node;
+			return this.head;
 		}
 			
 		else{
-			Node temp = head;
+			Node temp = this.head;
 			while(temp.next != null){
 				temp = temp.next;
 			}
@@ -32,17 +32,17 @@ public class LinkedList {
 	
 	public void deleteNode(Object data){
 		
-		if(head == null){
+		if(this.head == null){
 			System.out.println("The list is empty");
 		}
 		
-		else if(head.data == data){
-			head = head.next;
+		else if(this.head.data == data){
+			this.head = this.head.next;
 			System.out.println("The element has been deleted");
 		}
 		
 		else{
-			Node temp = head;
+			Node temp = this.head;
 			while(temp.next != null){
 				if(temp.next.data == data){
 					temp.next = temp.next.next;
@@ -56,7 +56,7 @@ public class LinkedList {
 	public void traverseList(){
 		System.out.println("");
 		System.out.println("Traversing the list");
-		Node temp = head;
+		Node temp = this.head;
 		while(temp.next != null){
 			System.out.println(temp.data);
 			temp = temp.next;
@@ -66,7 +66,7 @@ public class LinkedList {
 	
 	public int sizeOfLinkedList(){
 		int size = 0;
-		Node temp = head;
+		Node temp = this.head;
 		if(temp == null){
 			return 0;
 		}
@@ -81,8 +81,8 @@ public class LinkedList {
 	}
 	
 	public void removeDuplicateWithoutBuffer(){
-		Node fastRunner = head;
-		Node slowRunner = head;
+		Node fastRunner = this.head;
+		Node slowRunner = this.head;
 		while(slowRunner != null){
 			fastRunner = slowRunner;
 			//System.out.println("I am on this right now: "+fastRunner.data);
@@ -100,12 +100,12 @@ public class LinkedList {
 	}
 	
 	public void removeDuplicatesHashTable(){
-		Node temp = head;
+		Node temp = this.head;
 		HashMap<Object, Boolean> hashMap = new HashMap<Object, Boolean>();
 		while(temp.next != null){
 			if(hashMap.containsKey(temp.data)){
 				System.out.println("Contains duplicates");
-				Node follower = head;
+				Node follower = this.head;
 				while(follower.next != temp){
 					follower = follower.next;
 				}
@@ -118,7 +118,7 @@ public class LinkedList {
 		}
 		if(hashMap.containsKey(temp.data)){
 			System.out.println("Contains duplicates");
-			Node follower = head;
+			Node follower = this.head;
 			while(follower.next != temp){
 				follower = follower.next;
 			}
@@ -133,7 +133,7 @@ public class LinkedList {
 	public void findKthElement(int k){
 		//I will use two pointers, one slow and one fast pointer.
 		Node rear, forward;
-		rear = forward = head;
+		rear = forward = this.head;
 		
 		for(int i = 0; i<k-1; i++){
 			if(forward != null){
@@ -160,6 +160,24 @@ public class LinkedList {
 		node.next = node.next.next;
 		return node;
 	}
+	
+	public void sortBasedOnX(int x){
+		LinkedList greaterList = new LinkedList();
+		LinkedList smallerList = new LinkedList();
+		
+		Node temp = this.head;
+		while(temp.next != null){
+			if((Integer)(temp.data) < x){
+				smallerList.add(temp);
+			}
+			else{
+				greaterList.add(temp);
+			}
+			temp = temp.next;
+		}
+		
+	}
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -179,8 +197,10 @@ public class LinkedList {
 		System.out.println("");
 		linkedList.deleteNodeGivenAccess(n1);
 		linkedList.traverseList();
+		
+		
 		//linkedList.findKthElement(13);
-		/*System.out.println("Removing without bufffer");
+		/*System.out.println("Removing without buffer");
 		linkedList.removeDuplicateWithoutBuffer();
 		linkedList.traverseList();
 		//Using bubble sort to sort the array elements.
