@@ -1,0 +1,61 @@
+package chapter1;
+import java.util.Scanner;
+
+public class Question5 {
+	
+	public static void main(String args[]){
+		System.out.println("Please enter a string");
+		Scanner scanner = new Scanner(System.in);
+		String input = scanner.nextLine();
+		
+		Question5 question5 = new Question5();
+		String output = question5.compressString(input);
+		System.out.println("The output is "+output);
+	}
+	
+	public String compressString(String input){
+		//First we are going to check if the length of string is shorter.
+		int length = lengthCompressedString(input);
+		if(length>input.length())
+			return input;
+		else{
+			StringBuilder stringBuilder = new StringBuilder();
+			int count = 1;
+			char last = input.charAt(0);
+			for(int i = 1; i<input.length(); ++i){
+				if(input.charAt(i) == last){
+					count++;
+				}
+				else{
+					stringBuilder.append(last+String.valueOf(count));
+					count =1 ;
+					last = input.charAt(i);
+				}
+			}
+			stringBuilder.append(last+String.valueOf(count));
+			return stringBuilder.toString();
+		}
+		
+	}
+	
+	public int lengthCompressedString(String input){
+		char last = input.charAt(0);
+		int count = 1;
+		int length = 1;
+		for(int i = 1; i<input.length(); ++i){
+			if(last == input.charAt(i)){
+				count ++;
+			}
+			else{
+				length = length+1+String.valueOf(count).length();
+				last = input.charAt(i);
+				count = 1;
+			}
+			
+		}
+		length = length+String.valueOf(count).length();
+		System.out.println("The length of string is "+length);
+		return length;
+	}
+	
+}
